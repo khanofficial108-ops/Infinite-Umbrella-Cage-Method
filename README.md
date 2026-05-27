@@ -195,6 +195,13 @@ Prompt structure: Phase 1 identifies log line boundaries (stack traces merged). 
 
 
 
+
+
+
+
+
+
+
 Validation Methodology
 
 A prompt built with the Infinite Umbrella Cage Method must be validated, not assumed. Use the following protocol:
