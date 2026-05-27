@@ -184,6 +184,17 @@ Prompt structure: Phase 1 identifies log line boundaries (stack traces merged). 
 
 ---
 
+
+
+
+![Umbrella Cage Method Diagram](umbrella_cage_diagram.jpeg)
+
+*Figure 1: The Infinite Umbrella Cage Method - Umbrella (broad coverage) + Cage (strict constraints)*
+
+
+
+
+
 Validation Methodology
 
 A prompt built with the Infinite Umbrella Cage Method must be validated, not assumed. Use the following protocol:
