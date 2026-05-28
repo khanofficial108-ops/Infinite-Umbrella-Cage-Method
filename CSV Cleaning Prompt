@@ -1,1 +1,561 @@
 
+╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                 ULTIMATE STRICT CSV CLEANER - 30 ELEMENT COVERAGE - 95%+ CORRECTNESS TARGET                         ║
+║          HANDLES ANY CHAOTIC MESSY DATA | YOU PROCESS DIRECTLY - NO CODE | 50/50 SCORING                             ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+========================================================================================================================
+📌 YOUR MISSION
+========================================================================================================================
+
+I will UPLOAD a CSV file that may be EXTREMELY CHAOTIC and MESSY. You will PROCESS IT DIRECTLY and OUTPUT a perfectly cleaned CSV.
+
+You are NOT writing code. You are NOT asking me to run anything. YOU do ALL the cleaning work right now.
+
+TARGET: 95%+ CORRECTNESS ON ANY MESSY CSV - NO EXCUSES, NO EXCEPTIONS.
+
+========================================================================================================================
+📌 THE 30 UNIVERSAL ELEMENTS - YOU MUST HANDLE EVERY SINGLE ONE
+========================================================================================================================
+
+Your cleaning MUST handle ALL 30 elements below. No exceptions. No skipping.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECTION A: CORE STRUCTURAL ELEMENTS (Elements 1-8)
+
+ELEMENT 1 - DELIMITER CHAOS:
+   • Mixed delimiters in same file (comma + semicolon + pipe + tab)
+   • Inconsistent quoting (some fields quoted, some not)
+   • Spaces before/after delimiters ("one , two , three")
+   • Multiple consecutive delimiters (,,,)
+   • Line breaks inside fields without proper quoting
+
+ELEMENT 2 - QUOTE ISSUES:
+   • Missing opening or closing quotes
+   • Escaped quotes inside fields ("" or \")
+   • Inconsistent quote usage across rows
+   • Quotes around some values but not others
+
+ELEMENT 3 - ENCODING NIGHTMARE:
+   • UTF-8 with BOM (﻿ at start)
+   • UTF-16, Latin-1, CP1252, ASCII mix
+   • Corrupted characters (Ã© instead of é)
+   • Invisible characters (zero-width spaces, null bytes)
+   • Emojis or special symbols (★, ✔, ✓, ●)
+
+ELEMENT 4 - HEADER DISASTER:
+   • No header row at all
+   • Headers on row 5, 10, or anywhere (not first row)
+   • Duplicate column names ("Name", "Name", "Name")
+   • Special characters in headers ("Employee ID!", "@Salary#", "Joining-Date")
+   • Spaces, tabs, or line breaks in header names
+
+ELEMENT 5 - SPECIAL CHARACTERS IN HEADERS:
+   • Emojis in column names (💀, 🔥, ★)
+   • Symbols in column names ($, @, #, %, ^, &, *, (, ), -, +, =)
+   • Punctuation in column names (!, ?, ., ,, ;, :, ', ")
+   • Mixed language characters (English, Japanese, Arabic, etc.)
+
+ELEMENT 6 - HEADER CASE INCONSISTENCY:
+   • Mixed case in same header row
+   • Example: "Employee ID", "employee id", "EMPLOYEE ID" in same file
+   • Standardize to lowercase with underscores
+
+ELEMENT 7 - EMPTY HEADERS:
+   • Missing column names (,,Name,)
+   • Placeholder headers ("Column1", "Unnamed", "X")
+   • Empty strings as column names
+
+ELEMENT 8 - HEADER-DATA ROW MISALIGNMENT:
+   • Header says "Date" but column contains text
+   • Header says "Number" but column contains strings
+   • Data type mismatch between header expectation and actual values
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECTION B: DATE & TIME ELEMENTS (Elements 9-12)
+
+ELEMENT 9 - DATE FORMAT CHAOS:
+   • MM/DD/YYYY (01/15/2024)
+   • DD/MM/YYYY (15/01/2024)
+   • YYYY-MM-DD (2024-01-15)
+   • Month DD, YYYY (January 15, 2024)
+   • DD-Mon-YYYY (15-Jan-2024)
+   • Mixed formats in same column!
+
+ELEMENT 10 - INVALID DATES:
+   • Impossible dates (02/30/2024, 13/01/2024)
+   • Flag as invalid but DO NOT change
+   • Keep original value
+   • Add note in cleaning report
+
+ELEMENT 11 - DATE WITH TIME:
+   • Timestamps mixed with dates (2024-01-15 14:30:00)
+   • Time zones (2024-01-15T14:30:00Z)
+   • 12-hour vs 24-hour formats (2:30 PM vs 14:30)
+   • Extract date portion or keep full timestamp
+
+ELEMENT 12 - RELATIVE DATES:
+   • Non-standard date references ("yesterday", "today", "last week")
+   • "2 days ago", "next month", "last year"
+   • Keep as-is, do NOT convert to absolute dates
+   • Add note in cleaning report
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECTION C: NUMBERS & CURRENCY ELEMENTS (Elements 13-17)
+
+ELEMENT 13 - NUMBER FORMAT CHAOS:
+   • Thousand separators (1,234,567.89)
+   • European decimals (1.234.567,89)
+   • Numbers with spaces (1 234 567)
+   • Mixed formats in same column!
+
+ELEMENT 14 - CURRENCY SYMBOLS:
+   • Symbols attached to numbers ($1234.56)
+   • Symbols separate (1234 USD, 1234 $)
+   • Multiple currencies ($, €, £, ¥, ₹)
+   • KEEP symbols attached to numbers ($1234.56 NOT 1234.56)
+
+ELEMENT 15 - NEGATIVE NUMBERS:
+   • Standard minus sign (-123)
+   • Parentheses (123)
+   • Trailing minus (123-)
+   • Convert all to minus sign format (-123)
+
+ELEMENT 16 - SCIENTIFIC NOTATION:
+   • Exponential format (1.23e+10)
+   • Capital E (1.23E-05)
+   • Keep as-is or convert to decimal (document in report)
+
+ELEMENT 17 - PERCENTAGES:
+   • Percent symbol (15%)
+   • Decimal (0.15)
+   • Text ("15 percent")
+   • Keep as-is, do NOT convert between formats
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECTION D: TEXT QUALITY ELEMENTS (Elements 18-22)
+
+ELEMENT 18 - MISSING SPACES:
+   • Words concatenated (customerSilverlineTech)
+   • DO NOT add spaces (keep as-is)
+   • Original value must remain unchanged
+
+ELEMENT 19 - EXTRA SPACES:
+   • Multiple consecutive spaces ("John   Doe")
+   • Normalize to single space ("John Doe")
+   • This is an ALLOWED change
+
+ELEMENT 20 - LEADING/TRAILING SPACES:
+   • Spaces before values ("  John")
+   • Spaces after values ("Doe  ")
+   • TRIM both sides (allowed change)
+
+ELEMENT 21 - SPECIAL CHARACTERS IN TEXT:
+   • Emojis (💀, 🔥, ✓, •, ★, ✔, ❌)
+   • HTML entities (&amp;, &lt;, &gt;, &quot;)
+   • Symbols ($, €, £, %, #, @, &)
+   • KEEP ALL of them. Do NOT remove or convert.
+
+ELEMENT 22 - LANGUAGE VARIATIONS:
+   • Mixed languages (English, Japanese, Arabic, etc.)
+   • Unicode vs ASCII (café vs cafe, Müller vs Mueller)
+   • Preserve original exactly, do NOT normalize
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECTION E: MISSING & PLACEHOLDER ELEMENTS (Elements 23-26)
+
+ELEMENT 23 - STANDARD PLACEHOLDERS:
+   • Common null markers (NULL, N/A, NA, -, --)
+   • Question markers (???, ????, ?)
+   • Error markers (ERR, ERROR, #ERROR)
+   • KEEP them exactly as-is. Do NOT replace with empty.
+
+ELEMENT 24 - NUMERIC PLACEHOLDERS:
+   • Special numbers indicating missing (-9999, -1, 9999, 0 in context)
+   • Keep as-is, do NOT convert to empty
+   • Document in cleaning report
+
+ELEMENT 25 - TEXT PLACEHOLDERS:
+   • Words indicating missing (unknown, missing, not available, TBD)
+   • Keep as-is, do NOT change
+   • Document in cleaning report
+
+ELEMENT 26 - EMPTY VALUES:
+   • Truly empty fields ("", ,,)
+   • Leave as empty string
+   • Do NOT fill with NULL, N/A, Unknown, or anything else
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECTION F: STRUCTURAL ELEMENTS (Elements 27-30)
+
+ELEMENT 27 - BLANK ROWS:
+   • Completely empty rows (all fields empty)
+   • REMOVE these rows (allowed)
+   • Count and report in cleaning report
+
+ELEMENT 28 - MALFORMED ROWS:
+   • Rows with wrong number of columns
+   • Pad with empty strings if too few columns
+   • Truncate if too many columns (keep first N where N = header count)
+   • Document in cleaning report
+
+ELEMENT 29 - METADATA/HEADERS/FOOTERS:
+   • Extra lines before data ("Report generated on...", "Page 1 of 10")
+   • Extra lines after data ("---", "End of report")
+   • REMOVE these lines (allowed)
+   • Document in cleaning report
+
+ELEMENT 30 - LINE BREAKS INSIDE FIELDS:
+   • Multi-line cells ("Line 1\nLine 2")
+   • Unescaped newlines breaking row structure
+   • Replace with space if breaking structure
+   • Keep if properly quoted
+
+========================================================================================================================
+📌 PART 1 ENDS HERE
+========================================================================================================================
+
+
+========================================================================================================================
+📌 PART 2 CONTINUED: YOUR CLEANING ACTIONS - YOU MUST PERFORM EVERY STEP
+========================================================================================================================
+
+STEP 1: DETECT EVERYTHING BEFORE CLEANING
+   • Scan the ENTIRE file to understand what you're dealing with
+   • Identify ALL 30 elements from PART 1 that exist in this file
+   • Document every issue found (you will report this)
+   • Count how many of the 30 elements are present
+
+STEP 2: FIX ENCODING (MANDATORY)
+   • Detect encoding automatically (UTF-8, UTF-16, Latin-1, CP1252, ASCII)
+   • Convert EVERYTHING to UTF-8
+   • Remove BOM (﻿) from beginning
+   • Replace unreadable characters with [?] ONLY if absolutely impossible to decode
+
+STEP 3: REMOVE METADATA AND JUNK ROWS (MANDATORY)
+   • Remove comments, notes, or metadata at top of file (Element 29)
+   • Remove completely empty rows (all fields empty) (Element 27)
+   • Remove rows that are clearly not data (e.g., "Page 1 of 10", "Report generated by...")
+   • Keep ALL rows that contain any data, even if malformed
+
+STEP 4: DETECT AND STANDARDIZE DELIMITER (MANDATORY)
+   • Detect the delimiter by scanning first 10 rows
+   • Check for: comma (,), semicolon (;), pipe (|), tab (\t), space ( )
+   • Convert ALL to comma (,) in output
+   • Handle quoted fields properly (don't break on delimiters inside quotes)
+
+STEP 5: IDENTIFY HEADER ROW (MANDATORY)
+   • Search for header row (not necessarily first row!)
+   • Look for rows where values are text (not numbers/dates)
+   • Look for patterns like "ID", "Name", "Date", "Amount", "Email", "Phone"
+   • If no header found, generate Column_1, Column_2, Column_3...
+
+STEP 6: CLEAN HEADER NAMES (MANDATORY)
+   • Convert ALL to lowercase (Element 6)
+   • Replace spaces with underscores (Element 4)
+   • Remove ALL special characters (keep only a-z, 0-9, underscore) (Element 5)
+   • Handle duplicates: name, name_1, name_2
+   • Trim leading/trailing spaces
+   • Remove empty headers (replace with "column_X") (Element 7)
+
+STEP 7: STANDARDIZE DATA TYPES WITHOUT CHANGING VALUES (MANDATORY)
+   • For DATES: Convert valid dates to YYYY-MM-DD format (Element 9)
+   • For INVALID DATES: Keep as-is, flag in report (Element 10)
+   • For DATES WITH TIME: Keep full timestamp or extract date (Element 11)
+   • For RELATIVE DATES: Keep as-is (Element 12)
+   • For NUMBERS: Remove thousand separators, keep decimals (Element 13)
+   • For CURRENCIES: Keep symbol attached to number (Element 14)
+   • For NEGATIVE NUMBERS: Convert to minus sign format (Element 15)
+   • For SCIENTIFIC NOTATION: Keep as-is or document conversion (Element 16)
+   • For PERCENTAGES: Keep as-is (Element 17)
+
+STEP 8: CLEAN TEXT FIELDS (MANDATORY)
+   • Trim ALL leading and trailing spaces (Element 20)
+   • Fix missing spaces? DO NOT ADD (Element 18 - keep as-is)
+   • Remove extra spaces: "John   Doe" → "John Doe" (Element 19 - allowed)
+   • Keep ALL special characters, emojis, symbols (Element 21)
+   • Preserve original spelling, grammar, punctuation (Element 22)
+   • Keep placeholders exactly as-is (Elements 23, 24, 25)
+   • Leave empty values as empty (Element 26)
+
+STEP 9: FIX STRUCTURAL ISSUES (MANDATORY)
+   • Remove blank rows (all fields empty) (Element 27)
+   • Pad rows with missing columns using empty strings (Element 28)
+   • Truncate rows with extra columns (keep first N columns where N = header count)
+   • Fix line breaks inside fields (replace with space) (Element 30)
+   • Fix unmatched quotes (add missing quotes or remove problematic ones) (Element 2)
+
+STEP 10: VALIDATE AND REPORT (MANDATORY)
+   • Verify all rows have consistent column count
+   • Verify no data was lost (count original vs cleaned rows)
+   • Verify no data values were changed (only structure)
+   • Count which of the 30 elements were detected and fixed
+   • Generate COMPLETE cleaning report
+
+
+========================================================================================================================
+📌 CRITICAL RULES - VIOLATION = FAILURE (NO EXCEPTIONS)
+========================================================================================================================
+
+RULE 1 - YOU MUST PRESERVE EVERY SINGLE ORIGINAL VALUE:
+   • Change NO actual data (numbers, names, addresses, IDs, emails)
+   • Change ONLY structure (delimiters, encoding, date FORMAT, spacing)
+   • NEVER correct spelling, grammar, or perceived "errors"
+   • NEVER "fix" a value that looks wrong (e.g., "invalid_email" stays as is)
+   • NEVER round, truncate, or modify numbers (only remove thousand separators)
+
+RULE 2 - YOU MUST KEEP CURRENCY SYMBOLS:
+   • $1234.56 MUST remain $1234.56
+   • €987.65 MUST remain €987.65
+   • £5000 MUST remain £5000
+   • DO NOT convert to plain numbers
+   • "$$$" is a valid value, do NOT remove or change
+
+RULE 3 - YOU MUST PRESERVE LEADING ZEROS:
+   • "00123" MUST remain "00123" (if column contains IDs or codes)
+   • "EMP0001" MUST remain "EMP0001"
+   • "0001" MUST remain "0001"
+   • Detect if column is ID/Code vs Number
+
+RULE 4 - YOU MUST NOT DELETE ROWS WITH PARTIAL DATA:
+   • Keep rows even if some columns are empty
+   • ONLY delete rows that are COMPLETELY empty (all fields blank)
+   • NEVER delete rows marked "THIS ROW WRONG" or "###" or similar flags
+   • These are FLAGS, not errors to delete
+
+RULE 5 - YOU MUST NOT ADD DATA:
+   • Do NOT fill empty values with "NULL", "N/A", "Unknown", or anything else
+   • Leave empty values as empty strings
+
+RULE 6 - YOU MUST NOT CHANGE DATE VALUES (only format):
+   • January 15, 2024 → 2024-01-15 (value unchanged, format changed)
+   • NEVER change "2024-01-15" to "2024-01-16"
+   • NEVER convert "yesterday" to an absolute date
+
+RULE 7 - YOU MUST NOT CHANGE GIBBERISH OR PLACEHOLDERS:
+   • "asdfghjkl" MUST stay "asdfghjkl"
+   • "🔥" MUST stay "🔥"
+   • "???" MUST stay "???"
+   • "ERR" MUST stay "ERR"
+   • Do NOT "standardize" or "fix" any text value
+
+RULE 8 - YOU MUST PROVIDE COMPLETE OUTPUT:
+   • Cleaned CSV as DOWNLOADABLE FILE (NOT pasted as text)
+   • Cleaning report (downloadable)
+   • Correctness score (displayed)
+
+========================================================================================================================
+📌 COMPLETE OUTPUT FORMAT (MUST PROVIDE EXACTLY THIS)
+========================================================================================================================
+
+ELEMENT 1: DOWNLOADABLE CLEANED CSV FILE
+   📥 [Click to Download: cleaned_data.csv](data:text/csv;charset=utf-8,...)
+
+ELEMENT 2: DOWNLOADABLE CLEANING REPORT
+   📥 [Click to Download: cleaning_report.txt](data:text/plain;charset=utf-8,...)
+   
+   Report MUST include:
+   • Original file size
+   • Cleaned file size
+   • Total rows processed
+   • Total columns detected
+   • Delimiter detected and converted
+   • Encoding detected and converted to UTF-8
+   • Headers before and after cleaning
+   • Elements detected (list which of the 30 elements were found)
+   • Date formats normalized (count)
+   • Numbers cleaned (count)
+   • Currency symbols preserved (count)
+   • Blank rows removed (count)
+   • Invalid rows fixed (count)
+   • Issues found (full list)
+   • Warnings (any remaining issues)
+
+ELEMENT 3: CORRECTNESS SCORE REPORT (displayed)
+
+=== CORRECTNESS SCORE REPORT ===
+┌─────────────────────────────────────────────────────────────┐
+│ DATA INTEGRITY SCORE:     [XX.X]%  (50% weight)             │
+│   • Rows preserved:        X of Y (XX%)                     │
+│   • Data values preserved: XX%                              │
+│   • Currency symbols kept: Yes/No                           │
+│   • Leading zeros kept:    Yes/No                           │
+│   • Penalties:             [list if any]                    │
+├─────────────────────────────────────────────────────────────┤
+│ CLEANING ACCURACY SCORE:   [XX.X]%  (50% weight)            │
+│   • Encoding fix:          ✅/❌                             │
+│   • Delimiter fix:         ✅/❌                             │
+│   • Headers cleaned:       ✅/❌                             │
+│   • Dates normalized:      ✅/❌                             │
+│   • Numbers cleaned:       ✅/❌                             │
+│   • Currency preserved:    ✅/❌                             │
+│   • Leading zeros kept:    ✅/❌                             │
+│   • Blank rows handled:    ✅/❌                             │
+│   • Quotes fixed:          ✅/❌                             │
+│   • Report complete:       ✅/❌                             │
+├─────────────────────────────────────────────────────────────┤
+│   🎯 OVERALL CORRECTNESS:   [XX.X]%                          │
+│   Grade: A (95-100%) | B (90-94%) | F (<90%)                │
+└─────────────────────────────────────────────────────────────┘
+
+IF OVERALL CORRECTNESS IS BELOW 95%:
+=== IMPROVEMENT PLAN ===
+• Exactly what went wrong
+• Which of the 30 elements caused the failure
+• How to fix it
+• What would be done differently
+
+IF OVERALL CORRECTNESS IS 95% OR ABOVE:
+✅ TARGET ACHIEVED: 95%+ Correctness
+
+ELEMENT 4: EXECUTIVE SUMMARY (displayed)
+=== EXECUTIVE SUMMARY ===
+Dataset overview: [2-3 sentences]
+Which of the 30 elements were detected: [list]
+Key findings: [5 bullet points]
+Recommended actions: [3-4 bullet points]
+=== END SUMMARY ===
+
+========================================================================================================================
+📌 CORRECTNESS SCORE FORMULA
+========================================================================================================================
+
+FINAL CORRECTNESS = (Data Integrity Score × 0.5) + (Cleaning Accuracy Score × 0.5)
+
+TARGET: 95%+
+
+DATA INTEGRITY SCORE (50% of total) is calculated as:
+   • Rows Preserved (25% of Integrity): (cleaned_rows ÷ messy_rows) × 100
+   • Data Values Preserved (50% of Integrity): (matching_cells ÷ total_cells) × 100
+   • Currency Symbols Kept (12.5% of Integrity): 100% if all kept, 0% if any lost
+   • Leading Zeros Kept (12.5% of Integrity): 100% if all kept, 0% if any lost
+
+CLEANING ACCURACY SCORE (50% of total) is calculated as:
+   • 10 checks, each worth 10%
+   • Encoding fix: 10%
+   • Delimiter fix: 10%
+   • Headers cleaned: 10%
+   • Dates normalized: 10%
+   • Numbers cleaned: 10%
+   • Currency preserved: 10%
+   • Leading zeros kept: 10%
+   • Blank rows handled: 10%
+   • Quotes fixed: 10%
+   • Report complete: 10%
+
+========================================================================================================================
+
+========================================================================================================================
+📌 WHAT YOU ARE FORBIDDEN FROM DOING (VIOLATION = FAILURE)
+========================================================================================================================
+
+❌ Changing ANY original data value (names, numbers, addresses, IDs, emails)
+❌ Removing currency symbols ($, €, £, ¥, ₹)
+❌ Removing leading zeros from IDs or codes
+❌ Filling empty values with NULL, N/A, Unknown, or anything else
+❌ Deleting rows with partial data (only delete completely empty rows)
+❌ Deleting rows marked "THIS ROW WRONG" or "###" (these are FLAGS, not errors)
+❌ Changing "asdfghjkl" or "🔥" or any gibberish text
+❌ "Fixing" spelling, grammar, or perceived errors
+❌ Changing date values (only format allowed)
+❌ Rounding or modifying numbers
+❌ Converting "yesterday" to an absolute date
+❌ Adding spaces to missing-space words (customerSilverlineTech → keep as-is)
+❌ Pasting CSV as text in conversation (must be downloadable)
+❌ Skipping the cleaning report
+❌ Skipping correctness score calculation
+❌ Using fake or estimated scores
+❌ Writing code for me to run
+❌ Asking me to run anything
+❌ Using external tools or libraries
+
+========================================================================================================================
+📌 VALIDATION CHECKLIST (RUN THIS BEFORE RESPONDING)
+========================================================================================================================
+
+30 ELEMENTS VALIDATION:
+□ Element 1 (Delimiters): Handled? (YES/NO)
+□ Element 2 (Quotes): Handled? (YES/NO)
+□ Element 3 (Encoding): Handled? (YES/NO)
+□ Element 4 (Headers): Handled? (YES/NO)
+□ Element 5 (Special chars in headers): Handled? (YES/NO)
+□ Element 6 (Header case): Handled? (YES/NO)
+□ Element 7 (Empty headers): Handled? (YES/NO)
+□ Element 8 (Header-data misalignment): Handled? (YES/NO)
+□ Element 9 (Date formats): Handled? (YES/NO)
+□ Element 10 (Invalid dates): Handled? (YES/NO)
+□ Element 11 (Date with time): Handled? (YES/NO)
+□ Element 12 (Relative dates): Handled? (YES/NO)
+□ Element 13 (Number formats): Handled? (YES/NO)
+□ Element 14 (Currency symbols): Handled? (YES/NO)
+□ Element 15 (Negative numbers): Handled? (YES/NO)
+□ Element 16 (Scientific notation): Handled? (YES/NO)
+□ Element 17 (Percentages): Handled? (YES/NO)
+□ Element 18 (Missing spaces): Handled? (YES/NO)
+□ Element 19 (Extra spaces): Handled? (YES/NO)
+□ Element 20 (Leading/trailing spaces): Handled? (YES/NO)
+□ Element 21 (Special characters): Handled? (YES/NO)
+□ Element 22 (Language variations): Handled? (YES/NO)
+□ Element 23 (Standard placeholders): Handled? (YES/NO)
+□ Element 24 (Numeric placeholders): Handled? (YES/NO)
+□ Element 25 (Text placeholders): Handled? (YES/NO)
+□ Element 26 (Empty values): Handled? (YES/NO)
+□ Element 27 (Blank rows): Handled? (YES/NO)
+□ Element 28 (Malformed rows): Handled? (YES/NO)
+□ Element 29 (Metadata): Handled? (YES/NO)
+□ Element 30 (Line breaks): Handled? (YES/NO)
+
+CRITICAL RULES VALIDATION:
+□ Did I preserve EVERY original data value? (YES/NO)
+□ Did I keep currency symbols ($, €, £)? (YES/NO)
+□ Did I keep leading zeros? (YES/NO)
+□ Did I keep "asdfghjkl" and "🔥" unchanged? (YES/NO)
+□ Did I keep "???" and "ERR" unchanged? (YES/NO)
+□ Did I NOT delete rows with "THIS ROW WRONG"? (YES/NO)
+□ Did I only delete completely empty rows? (YES/NO)
+□ Did I convert dates to YYYY-MM-DD only? (YES/NO)
+□ Did I leave empty values as empty? (YES/NO)
+□ Did I provide downloadable cleaned CSV? (YES/NO)
+□ Did I provide cleaning report? (YES/NO)
+□ Did I calculate correctness score? (YES/NO)
+□ Is overall correctness 95% or above? (YES/NO - if no, provide improvement plan)
+
+========================================================================================================================
+📌 FINAL REMINDER - YOUR TARGET
+========================================================================================================================
+
+TARGET: 95%+ CORRECTNESS ON ANY CHAOTIC MESSY CSV
+
+You will be evaluated on:
+• Data Integrity (50%) - All values preserved, currency symbols kept, leading zeros kept
+• Cleaning Accuracy (50%) - All 30 elements detected and fixed correctly
+
+FAILURE to achieve 95%+ means you must provide an improvement plan explaining exactly which of the 30 elements caused the failure.
+
+========================================================================================================================
+📌 WHAT YOU MUST DO - COMPLETE WORKFLOW
+========================================================================================================================
+
+1. RECEIVE my uploaded messy CSV file
+2. SCAN the ENTIRE file to detect ALL 30 elements from PART 1
+3. PLAN your cleaning (which issues exist, how to fix them)
+4. EXECUTE cleaning steps in order (STEP 1 through STEP 10)
+5. VERIFY no data values were changed (only structure)
+6. GENERATE downloadable cleaned CSV file
+7. GENERATE downloadable cleaning report (including which of the 30 elements were detected)
+8. CALCULATE correctness score (Data Integrity 50% + Cleaning Accuracy 50%)
+9. DISPLAY score report and executive summary
+
+========================================================================================================================
+📌 PART 2 ENDS HERE
+========================================================================================================================
+
+I am now uploading my chaotic messy CSV file.
+
+========================================================================================================================
